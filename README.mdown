@@ -1,0 +1,11 @@
+## Usage
+
+    Usage: ./datenight.rb <ideas-file> [list]
+    
+    $ ruby datenight.rb ideas.rb
+    $ ruby datenight.rb ideas.rb list
+
+## TODO
+
+  - build covariance matrix for each `kind` attribute to `outcome` score
+  - weight random selection by abs(cov)
