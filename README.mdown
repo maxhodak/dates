@@ -3,7 +3,7 @@
     Usage: ./datenight.rb <ideas-file> [list]
     
     $ ruby datenight.rb ideas.rb
-    $ ruby datenight.rb ideas.rb list
+    $ ruby datenight.rb ideas.rb --list
 
 ## TODO
 

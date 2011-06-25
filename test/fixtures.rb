@@ -6,6 +6,16 @@ DateIdeas.plan do
     outcome 20
   end
 
+  date "very close to primer" do
+    kind :adventure => 2, :romantic => 4, :intellectual => 6, :athletic => 1
+    requires :weather => 0, :hours => 2
+  end
+
+  date "very far from primer" do
+    kind :adventure => 10, :romantic => 10, :intellectual => 0, :athletic => 10
+    requires :weather => 0, :hours => 2
+  end
+
   date "escher in the DiVE" do
     kind :adventure => 4, :romantic => 3, :intellectual => 4, :athletic => 0
     requires :weather => 0, :hours => 2
@@ -17,23 +27,8 @@ DateIdeas.plan do
   end
 
   date "duke observatory" do
-    kind :adventure => 5, :romantic => 7, :intellectual => 5, :athletic => 1
+    kind :adventure => 100, :romantic => 7, :intellectual => 5, :athletic => 1
     requires :weather => 8, :hours => 4
-  end
-
-  date "learn to ride a bicycle" do
-    kind :adventure => 7, :romantic => 3, :intellectual => 2, :athletic => 6
-    requires :weather => 8, :hours => 1
-  end
-
-  date "watch _serenity_" do
-    kind :adventure => 2, :romantic => 4, :intellectual => 5, :athletic => 0
-    requires :weather => 0, :hours => 2
-  end
-
-  date "watch _thank you for smoking_" do
-    kind :adventure => 2, :romantic => 4, :intellectual => 5, :athletic => 0
-    requires :weather => 0, :hours => 2
   end
 
 end
