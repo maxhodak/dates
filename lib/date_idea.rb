@@ -44,7 +44,7 @@ class DateIdea
   end
 
   def complete?
-    @outcome == nil
+    @outcome != nil
   end
 
   def to_s

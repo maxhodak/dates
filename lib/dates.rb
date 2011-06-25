@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
+require 'colorize'
 require 'statsample'
 require 'trollop'
 require 'date_ideas'

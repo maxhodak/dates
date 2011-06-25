@@ -26,13 +26,6 @@ end
 
 cmd = ARGV.shift if ARGV.length > 1
 
-when_opts = Trollop::options do
-  version VERSION_STR
-  banner "#{VERSION_STR}\nOptions for `choose` command:"
-  opt :weather, "Current weather score [0-9]", :short => :w, :default => 5.0
-  opt :time, "Time commitment score [0-9]", :short => :t, :default => 5.0
-end
-
 cmd_opts = case cmd
   when "list"
     Trollop::options do
@@ -41,10 +34,13 @@ cmd_opts = case cmd
       opt :incomplete, "Only the incomplete dates", :short => :i
       opt :complete, "Only the completed dates (with feedback)", :short => :c
     end
-  when "choose"
-    when_opts
   else # `choose` is default command: can be called without explicit specification
-    when_opts
+    Trollop::options do
+      version VERSION_STR
+      banner "#{VERSION_STR}\nOptions for `choose` command:"
+      opt :weather, "Current weather score [0-9]", :short => :w, :default => 5.0
+      opt :time, "Time commitment score [0-9]", :short => :t, :default => 5.0
+    end
   end
 
 if ARGV.length < 1
@@ -60,7 +56,11 @@ if nil == $dates
 end
 
 if "list" == cmd
-  puts $dates
+  if cmd_opts[:complete] and cmd_opts[:incomplete]
+    Trollop::die "-i and -c are mutually exclusive options for `list`"
+  else
+    puts $dates.list(cmd_opts)
+  end
 elsif "choose" == cmd
   puts $dates.choose(cmd_opts[:weather], cmd_opts[:time])
 else

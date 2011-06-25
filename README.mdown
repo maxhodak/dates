@@ -1,11 +1,44 @@
 ## Usage
 
-    Usage: ./datenight.rb <ideas-file> [list]
-    
-    $ ruby datenight.rb ideas.rb
-    $ ruby datenight.rb ideas.rb --list
+    $ bundle exec bin/dates.rb --help
+    dates 1.0.0-beta, max & daphne.
+    Usage: dates.rb [command] [options] <ideas-file>
 
-## TODO
+    To see help for a specific command, use the --help switch on that command.
 
-  - build covariance matrix for each `kind` attribute to `outcome` score
-  - weight random selection by abs(cov)
+    Commands:
+      choose  Choose a good date idea for right now! [default command]
+      list    Parse and list the contents of the date ideas file.
+
+    Global options:
+      --version, -v:   Print version and exit
+         --help, -h:   Show this message
+
+To run it, the simplest way is just to provide it with an ideas file and nothing else:
+
+    $ bundle exec bin/dates.rb ideas.rb
+    watch _serenity_: (intellectual: 5, athletic: 0, adventure: 2, romantic: 4)
+
+### Commands
+
+The `choose` command picks a date, and it takes two options:
+
+    $ bundle exec bin/dates.rb choose --help
+    dates 1.0.0-beta, max & daphne.
+    Options for `choose` command:
+      --weather, -w <f>:   Current weather score [0-9] (default: 5.0)
+         --time, -t <f>:   Time commitment score [0-9] (default: 5.0)
+
+The `list` command prints out the contents of an ideas file:
+
+    $ bundle exec bin/dates.rb list --help
+    dates 1.0.0-beta, max & daphne.
+    Options for `list` command:
+      --incomplete, -i:   Only the incomplete dates
+        --complete, -c:   Only the completed dates (with feedback)
+
+## Tests
+
+Dates uses RSpec 2 (core and expectations) for tests.  To run them, just call:
+
+    bundle exec rspec test/spec.rb -c -f d

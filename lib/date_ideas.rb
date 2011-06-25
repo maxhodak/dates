@@ -17,13 +17,38 @@ class DateIdeas
     @date_ideas << date
   end
 
-  #prints out date ideas
-  def to_s
+  def list(opts)
+    if opts[:complete]
+      render complete
+    elsif opts[:incomplete]
+      render incomplete
+    else
+      render
+    end
+  end
+
+  def render(ideas = nil)
+    if nil == ideas
+      ideas = @date_ideas
+    end
     str = "Date ideas:\n"
-    @date_ideas.each do |f|
-      str << "  #{f.to_s}"
+    ideas.each do |f|
+      if not f.complete?
+        str << "  #{f.to_s}".blue
+      elsif f.complete? and f.score >= 6.0
+        str << "  #{f.to_s}".green
+      elsif f.complete? and f.score < 6.0
+        str << "  #{f.to_s}".red
+      else
+        raise Exception("We should never reach this.")
+      end
     end
     str
+  end
+
+  #prints out date ideas
+  def to_s
+    render
   end
 
   #TODO: modify method to produce co-variance 
@@ -52,11 +77,11 @@ class DateIdeas
   end
 
   def complete
-    @date_ideas.reject { |idea| idea.complete? }
+    @date_ideas.reject { |idea| !idea.complete? }
   end
 
   def incomplete
-    @date_ideas.reject { |idea| !idea.complete? }
+    @date_ideas.reject { |idea| idea.complete? }
   end
 
   #randomly selects date (TODO: weight)
