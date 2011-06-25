@@ -1,3 +1,5 @@
+Dates keeps track of things you two have been meaning to do, and learns what's been fun and what hasn't along several different dimensions (adventure, romantic, intellectual, athletic).
+
 ## Usage
 
     $ bundle exec bin/dates.rb --help
