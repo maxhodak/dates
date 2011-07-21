@@ -13,7 +13,9 @@ class DateIdeas
   # adds a date to the date_ideas list
   def date(name, &block)
     date = DateIdea.new(name)
-    date.instance_eval(&block)
+    if block
+      date.instance_eval(&block)
+    end
     @date_ideas << date
   end
 
@@ -57,19 +59,20 @@ class DateIdeas
 
     @date_ideas.each do |idea_a|
       @date_ideas.each do |idea_b|
-        cov[[idea_a, idea_b]] = 0
-        length_a = 0
-        length_b = 0
-        all_keys = idea_a.attributes.keys
-        all_keys.each do |attribute|
-          cov[[idea_a, idea_b]] = cov[[idea_a, idea_b]] + idea_a.attributes[attribute] * idea_b.attributes[attribute]
-          length_a = length_a + idea_a.attributes[attribute] ** 2
-          length_b = length_b + idea_b.attributes[attribute] ** 2
+        if idea_a.attributes.length > 0 and idea_b.attributes.length > 0
+          cov[[idea_a, idea_b]] = 0
+          length_a = 0
+          length_b = 0
+          all_keys = idea_a.attributes.keys
+          all_keys.each do |attribute|
+            cov[[idea_a, idea_b]] = cov[[idea_a, idea_b]] + idea_a.attributes[attribute] * idea_b.attributes[attribute]
+            length_a = length_a + idea_a.attributes[attribute] ** 2
+            length_b = length_b + idea_b.attributes[attribute] ** 2
+          end
+
+          cov[[idea_a, idea_b]] = (cov[[idea_a, idea_b]]/(Math.sqrt(length_a)))/Math.sqrt(length_b)
+          # puts cov[[idea_a, idea_b]]
         end
-
-        cov[[idea_a, idea_b]] = (cov[[idea_a, idea_b]]/(Math.sqrt(length_a)))/Math.sqrt(length_b)
-        # puts cov[[idea_a, idea_b]]
-
       end
     end
 
@@ -77,11 +80,11 @@ class DateIdeas
   end
 
   def complete
-    @date_ideas.reject { |idea| !idea.complete? }
+    @date_ideas.reject { |idea| !idea.stub? and !idea.complete? }
   end
 
   def incomplete
-    @date_ideas.reject { |idea| idea.complete? }
+    @date_ideas.reject { |idea| !idea.stub? and idea.complete? }
   end
 
   #randomly selects date (TODO: weight)

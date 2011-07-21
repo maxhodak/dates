@@ -43,6 +43,10 @@ class DateIdea
     @outcome
   end
 
+  def stub?
+    @attributes.length > 0
+  end
+
   def complete?
     @outcome != nil
   end
