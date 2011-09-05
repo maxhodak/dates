@@ -84,6 +84,10 @@ DateIdeas.plan do
 
   date "ikea expedition"
 
-  date ""
+  date "camping in black rock desert"
+
+  date "camping in north carolina"
+
+  date "busch gardens in virginia"
 
 end
