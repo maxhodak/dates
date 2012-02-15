@@ -78,8 +78,6 @@ class DateIdeas
     terms = examples.map { |examples|
       examples[0] + examples[0].permutation(2).to_a.map { |term| term.reduce(1) {|acc,k| acc*k } }
     }
-    
-    puts terms.inspect
   end
 
   def complete_features
