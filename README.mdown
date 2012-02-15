@@ -1,4 +1,4 @@
-Dates keeps track of things you two have been meaning to do, and learns what's been fun and what hasn't along several different dimensions (adventure, romantic, intellectual, athletic).
+Dates keeps track of things you two have been meaning to do, and learns what's been fun and what hasn't along several different dimensions (i.e., adventure, romantic, intellectual, athletic; though, there aren't actually any assumptions about the dimensions you can use).
 
 ## Usage
 
