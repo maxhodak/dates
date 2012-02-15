@@ -21,6 +21,30 @@ To run it, the simplest way is just to provide it with an ideas file and nothing
     $ dates ideas.rb
     watch _serenity_: (intellectual: 5, athletic: 0, adventure: 2, romantic: 4)
 
+### Ideas
+
+Dates need an ideas file to work.  An ideas file looks like this:
+
+    DateIdeas.new do
+
+      date "watch _movie title_" do
+        kind :adventure => 2, :romantic => 4, :intellectual => 6, :athletic => 0
+        requires :weather => 0, :hours => 2
+        outcome 6
+      end
+
+      date "read a book" do
+        kind :romantic => 3, :adventure => 6, :athletic => 3, :intellectual => 5
+        requires :weather => 5, :hours => 2
+      end
+
+      date "go adventuring" do
+        kind :adventure => 5, :romantic => 7, :intellectual => 5, :athletic => 1
+        requires :weather => 8, :hours => 3
+      end
+
+    end
+
 ### Commands
 
 The `choose` command picks a date, and it takes two options:
