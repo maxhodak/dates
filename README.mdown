@@ -2,9 +2,9 @@ Dates keeps track of things you two have been meaning to do, and learns what's b
 
 ## Usage
 
-    $ bundle exec bin/dates.rb --help
+    $ dates --help
     dates 1.0.0-beta, max & daphne.
-    Usage: dates.rb [command] [options] <ideas-file>
+    Usage: dates [command] [options] <ideas-file>
 
     To see help for a specific command, use the --help switch on that command.
 
@@ -18,14 +18,14 @@ Dates keeps track of things you two have been meaning to do, and learns what's b
 
 To run it, the simplest way is just to provide it with an ideas file and nothing else:
 
-    $ bundle exec bin/dates.rb ideas.rb
+    $ dates ideas.rb
     watch _serenity_: (intellectual: 5, athletic: 0, adventure: 2, romantic: 4)
 
 ### Commands
 
 The `choose` command picks a date, and it takes two options:
 
-    $ bundle exec bin/dates.rb choose --help
+    $ dates choose --help
     dates 1.0.0-beta, max & daphne.
     Options for `choose` command:
       --weather, -w <f>:   Current weather score [0-9] (default: 5.0)
@@ -33,7 +33,7 @@ The `choose` command picks a date, and it takes two options:
 
 The `list` command prints out the contents of an ideas file:
 
-    $ bundle exec bin/dates.rb list --help
+    $ dates list --help
     dates 1.0.0-beta, max & daphne.
     Options for `list` command:
       --incomplete, -i:   Only the incomplete dates

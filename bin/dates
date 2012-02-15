@@ -8,7 +8,7 @@ global_opts = Trollop::options do
   version VERSION_STR
   banner <<-EOS
 #{VERSION_STR}
-Usage: dates.rb [command] [options] <ideas-file>
+Usage: dates [command] [options] <ideas-file>
 
 To see help for a specific command, use the --help switch on that command.
 
@@ -22,7 +22,11 @@ EOS
   stop_on SUB_COMMANDS
 end
 
-cmd = ARGV.shift if ARGV.length > 1
+if ARGV.length < 2
+  Trollop::die "Usage: dates [command] [opts] <ideas-file>"
+  exit 1
+end
+cmd = ARGV.shift
 
 cmd_opts = case cmd
   when "list"
@@ -42,7 +46,7 @@ cmd_opts = case cmd
   end
 
 if ARGV.length < 1
-  Trollop::die "Ideas file required"
+  Trollop::die "Usage: dates [command] [opts] <ideas-file>"
   exit 1
 end
 
