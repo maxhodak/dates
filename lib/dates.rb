@@ -5,5 +5,6 @@ require 'statsample'
 require 'trollop'
 require 'date_ideas'
 require 'date_idea'
+require 'mathn'
 
 $LOAD_PATH.shift
