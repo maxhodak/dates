@@ -2,15 +2,15 @@ class DateIdeas
 
   ATTRIBUTES = %w(adventure romantic athletic intellectual)
 
-  def initialize()
+  def initialize(&block)
     @date_ideas = []
+    instance_eval &block
   end
 
   def ideas
     @date_ideas
   end
 
-  # adds a date to the date_ideas list
   def date(name, &block)
     date = DateIdea.new(name)
     if block
@@ -48,80 +48,51 @@ class DateIdeas
     str
   end
 
-  #prints out date ideas
   def to_s
     render
   end
 
-  #TODO: modify method to produce co-variance 
-  def outcome_covariance
-    cov = {}
-
-    @date_ideas.each do |idea_a|
-      @date_ideas.each do |idea_b|
-        if idea_a.attributes.length > 0 and idea_b.attributes.length > 0
-          cov[[idea_a, idea_b]] = 0
-          length_a = 0
-          length_b = 0
-          all_keys = idea_a.attributes.keys
-          all_keys.each do |attribute|
-            cov[[idea_a, idea_b]] = cov[[idea_a, idea_b]] + idea_a.attributes[attribute] * idea_b.attributes[attribute]
-            length_a = length_a + idea_a.attributes[attribute] ** 2
-            length_b = length_b + idea_b.attributes[attribute] ** 2
-          end
-
-          cov[[idea_a, idea_b]] = (cov[[idea_a, idea_b]]/(Math.sqrt(length_a)))/Math.sqrt(length_b)
-          # puts cov[[idea_a, idea_b]]
-        end
-      end
-    end
-
-    cov
-  end
-
   def complete
-    @date_ideas.reject { |idea| !idea.stub? and !idea.complete? }
+    @date_ideas.reject { |idea| idea.stub? or not idea.complete? }
   end
 
   def incomplete
-    @date_ideas.reject { |idea| !idea.stub? and idea.complete? }
+    @date_ideas.reject { |idea| idea.stub? or idea.complete? }
   end
 
-  #randomly selects date (TODO: weight)
+  def extract_features(idea_list)
+    keys = idea_list.reduce([]) { |acc, idea|
+      acc << idea.attributes.keys
+    }.flatten.uniq
+    features = idea_list.map { |idea|
+      attributes = idea.attributes.map { |key, val|
+        [keys.index(key), val]
+      }.sort_by {|k| k[0]}.map { |e| e[1] }
+      [attributes, idea.outcome_safe]
+    }
+    [keys, features]
+  end
+
+  def fitted_model
+    dimensions, examples = complete_features
+    terms = examples.map { |examples|
+      examples[0] + examples[0].permutation(2).to_a.map { |term| term.reduce(1) {|acc,k| acc*k } }
+    }
+    
+    puts terms.inspect
+  end
+
+  def complete_features
+    extract_features(complete)
+  end
+
+  def incomplete_features
+    extract_features(incomplete)
+  end
+
   def choose(weather, time)
-
-    cov = outcome_covariance()
-    prior_weight = 0.5
-    sum = 0.0
-
-    date_scores = {}
-
-    incomplete.each do |option|
-      if option.requirements[:weather] < weather && option.requirements[:hours] <= time  #refactor
-        complete.each do |point|
-          value = 1.1**((point.score-5)*cov[[option, point]]*prior_weight) #GENERALIZE
-          date_scores[option] = value
-          sum += value
-        end
-      end
-    end
-
-    rand_choice=rand()*sum
-    #  puts rand_choice
-    #  puts sum
-    incomplete.each do |option|
-      if option.requirements[:weather] < weather && option.requirements[:hours] <= time
-        rand_choice -= date_scores[option]
-        if(rand_choice <= 0)
-          return option # this probably doesn't do what you think it does.
-        end
-      end
-    end
-  end
-
-  def self.plan(&block)
-    $dates = DateIdeas.new
-    $dates.instance_eval(&block)
+    fitted_model
+    incomplete.first
   end
 
 end

@@ -1,4 +1,4 @@
-DateIdeas.plan do
+DateIdeas.new do
 
   date "watch _primer_" do
     kind :adventure => 2, :romantic => 4, :intellectual => 6, :athletic => 0
@@ -6,13 +6,8 @@ DateIdeas.plan do
     outcome 6
   end
 
-  date "escher in the DiVE" do
-    kind :adventure => 4, :romantic => 3, :intellectual => 4, :athletic => 0
-    requires :weather => 0, :hours => 2
-  end
-
   date "mushroom hunting" do
-    kind :adventure => 6, :romantic => 3, :intellectual => 5, :athletic => 3
+    kind :romantic => 3, :adventure => 6, :athletic => 3, :intellectual => 5
     requires :weather => 5, :hours => 2
   end
 
@@ -24,16 +19,19 @@ DateIdeas.plan do
   date "learn to ride a bicycle" do
     kind :adventure => 7, :romantic => 3, :intellectual => 2, :athletic => 6
     requires :weather => 8, :hours => 1
+    outcome 10
   end
 
   date "watch _serenity_" do
     kind :adventure => 2, :romantic => 4, :intellectual => 5, :athletic => 0
     requires :weather => 0, :hours => 2
+    outcome 6
   end
 
   date "watch _thank you for smoking_" do
     kind :adventure => 2, :romantic => 4, :intellectual => 5, :athletic => 0
     requires :weather => 0, :hours => 2
+    outcome 6
   end
 
   date "learn to ice skate" do
@@ -59,6 +57,7 @@ DateIdeas.plan do
   date "flying lesson" do
     kind :adventure => 8, :romantic => 4, :intellectual => 2, :athletic => 6
     requires :weather => 8, :hours => 4
+    outcome 9
   end
 
   date "swimming in the quarry" do
@@ -68,9 +67,17 @@ DateIdeas.plan do
 
   date "golden belt"
 
-  date "learn to play portal"
+  date "learn to play portal" do
+    kind :adventure => 2, :romantic => 2, :intellectual => 6, :athletic => 2
+    requires :weather => 0, :hours => 2
+    outcome 5
+  end
 
-  date "learn to play starcraft"
+  date "learn to play starcraft" do
+    kind :adventure => 2, :romantic => 0, :intellectual => 5, :athletic => 2
+    requires :weather => 0, :hours => 2
+    outcome 2
+  end
 
   date "go to a public lecture"
 
@@ -80,9 +87,17 @@ DateIdeas.plan do
 
   date "go skydiving"
 
-  date "go wine tasting"
+  date "go wine tasting" do
+    kind :adventure => 7, :romantic => 7, :intellectual => 3, :athletic => 3
+    requires :weather => 7, :hours => 7
+    outcome 8
+  end
 
-  date "ikea expedition"
+  date "ikea expedition" do
+    kind :adventure => 7, :romantic => 3, :intellectual => 3, :athletic => 3
+    requires :weather => 0, :hours => 3
+    outcome 4
+  end
 
   date "camping in black rock desert"
 

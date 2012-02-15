@@ -2,8 +2,6 @@
 
 require File.dirname(__FILE__) + '/../lib/dates'
 
-$dates = nil
-
 SUB_COMMANDS = %w(list choose)
 VERSION_STR = "dates 1.0.0-beta, max & daphne."
 global_opts = Trollop::options do
@@ -48,21 +46,16 @@ if ARGV.length < 1
   exit 1
 end
 
-require ARGV.last
-
-if nil == $dates
-  Trollop::die "Invalid ideas file"
-  exit 1
-end
+ideas = eval(File.read(ARGV.first))
 
 if "list" == cmd
   if cmd_opts[:complete] and cmd_opts[:incomplete]
     Trollop::die "-i and -c are mutually exclusive options for `list`"
   else
-    puts $dates.list(cmd_opts)
+    puts ideas.list(cmd_opts)
   end
 elsif "choose" == cmd
-  puts $dates.choose(cmd_opts[:weather], cmd_opts[:time])
+  puts ideas.choose(cmd_opts[:weather], cmd_opts[:time])
 else
-  puts $dates.choose(cmd_opts[:weather], cmd_opts[:time])
+  puts ideas.choose(cmd_opts[:weather], cmd_opts[:time])
 end

@@ -19,8 +19,17 @@ class DateIdea
     end
   end
 
-  def outcome(score)
-    @outcome = score
+  def outcome(score = nil)
+    if score.nil?
+      @outcome
+    else
+      @outcome = score
+    end
+  end
+
+  def outcome_safe
+    return @outcome unless @outcome.nil?
+    -1
   end
 
   def attributes
@@ -44,19 +53,17 @@ class DateIdea
   end
 
   def stub?
-    @attributes.length > 0
+    @attributes.empty?
   end
 
   def complete?
-    @outcome != nil
+    not @outcome.nil?
   end
 
   def to_s
-    attr_str = @attributes.map { |k,v|
-    "#{k}: #{v}"
-    }.join(", ")
+    attr_str = @attributes.map { |k,v| "#{k}: #{v}" }.join(", ")
     date_str = "#{@name}: (#{attr_str})"
-    date_str = date_str + ", outcome: #{@outcome}" unless @outcome == nil
+    date_str = date_str + ", outcome: #{@outcome}" unless @outcome.nil?
     "#{date_str}\n"
   end
 
