@@ -3,7 +3,7 @@
 require File.dirname(__FILE__) + '/../lib/dates'
 
 SUB_COMMANDS = %w(list choose)
-VERSION_STR = "dates 1.0.0-beta, max & daphne."
+VERSION_STR = "dates #{Dates::VERSION}-beta, max & daphne."
 global_opts = Trollop::options do
   version VERSION_STR
   banner <<-EOS

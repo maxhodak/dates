@@ -6,5 +6,6 @@ require 'trollop'
 require 'date_ideas'
 require 'date_idea'
 require 'mathn'
+require 'version'
 
 $LOAD_PATH.shift
